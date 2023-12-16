@@ -1,0 +1,53 @@
+package CodeSoftTask;
+import java.util.Random;
+import java.util.Scanner;
+public class NumberGusessGaming {
+	public static void main(String[] arg) {
+		Scanner scan=new Scanner(System.in);
+		int Lowrange=1;
+		int highRange=100;
+		int rounds=0;
+		int attemptList=10;
+		int totalAttempt=0;
+		
+		System.out.println("Welcoming to the Number gusessing Game:");
+		Random random= new Random();
+		int targetvalue=random.nextInt(highRange-Lowrange+1)+Lowrange;
+		int attempt=0;
+		
+		System.out.println("\nRound " + (rounds + 1));
+        System.out.println("Guess the number between " + Lowrange + " and " + highRange);
+        while(attempt<attemptList) {
+        	System.out.println("Enter User Generate Value:");
+        	int uservalue=scan.nextInt();
+        	attempt++;
+        	if(uservalue==targetvalue) {
+        		System.out.println("Congraulations you woned in"+attempt+ "attempts");
+        		totalAttempt+=attempt;
+        		break;
+        	}
+        	else if(uservalue>targetvalue){
+        		System.out.println("Too High.. Try again! ");
+        	}else {
+        		System.out.println("Too low...Try again!  ");
+        	}
+        	System.out.println("The Random number is"+targetvalue+" is not matching with your number");
+        	if (attempt== attemptList) {
+                System.out.println("Sorry, you've reached the maximum number of attempts. The correct number was: " + targetvalue);
+            }
+        	System.out.println("Do you want playAgain\n(yes/no)");
+        	String playagain=scan.next().toLowerCase();
+        	if(playagain.equals("yes")) {
+        		System.out.println();
+        		rounds++;
+        	}else {
+                System.out.println("Thanks for playing! Your total score is based on the total attempts: " + totalAttempt);
+                break;
+     }
+		
+		
+		
+	}
+
+	}
+}
