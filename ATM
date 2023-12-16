@@ -1,0 +1,99 @@
+package CodeSoftTask;
+import java.util.Scanner;
+
+class BankAccount{
+	private double accountBalance;
+	public BankAccount(double initialBalance) {
+        this.accountBalance = initialBalance;
+    }
+
+    public double getBalance() {
+        return accountBalance;
+    }
+
+    public void deposit(double amount) {
+    	accountBalance += amount;
+    }
+    public boolean withdraw(double amount) {
+    	if(accountBalance>amount) {
+    		accountBalance -=amount;
+    		return true;
+    	
+    	}else {
+    		return false;
+    	}
+    }
+}
+public class ATMMachine {
+	private BankAccount bankaccount;
+	private Scanner scan;
+	public ATMMachine(BankAccount bankaccount) {
+		this.bankaccount = bankaccount;
+        this.scan = new Scanner(System.in);
+		
+	}
+	public void processOption(int option) {
+		switch (option) {
+        case 1:
+            checkBalance();
+            break;
+        case 2:
+            deposit();
+            break;
+        case 3:
+            withdraw();
+            break;
+        case 4:
+            System.out.println("Thank you for using the ATM. VISIT AGAIN");
+            System.exit(0);
+            break;
+        default:
+            System.out.println("Invalid option. Please choose a valid option.");
+        }
+	}
+	public void withdraw() {
+		System.out.println("Enter the withdraw amount:$");
+		double amt=scan.nextDouble();
+		if(bankaccount.getBalance()>amt) {
+			bankaccount.withdraw(amt);
+			System.out.println("withdraw sucessfully ,Remaining Amount is:$"+bankaccount.getBalance());
+		}else {
+			System.out.println("insufficent Amount Available in your bank account.....");
+		}
+	
+	}
+	public void deposit() {
+		System.out.print("Enter the deposit amount: $");
+        double amount = scan.nextDouble();
+        if (amount > 0) {
+            bankaccount.deposit(amount);
+            System.out.println("Deposit successful. Current Balance: $" + bankaccount.getBalance());
+        } else {
+            System.out.println("Invalid amount. Please enter a positive value for deposit.");
+        }
+		
+	}
+	public void checkBalance() {
+		System.out.println("The Actuall Balance is:$"+bankaccount.getBalance());
+		
+	}
+	public static void main(String[] args) {
+		BankAccount userAccount = new BankAccount(1000.0);
+		ATMMachine atm=new ATMMachine(userAccount);
+		while(true) {
+			System.out.println("Welcome to the ATM!");
+	        System.out.println("1. Check Balance");
+	        System.out.println("2. Deposit");
+	        System.out.println("3. Withdraw");
+	        System.out.println("4. Exit");
+	        System.out.println("enter The option 1-4");
+	        int option=atm.scan.nextInt();
+	        atm.processOption(option);
+	        
+		}
+		
+		
+		
+	}
+
+}
